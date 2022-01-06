@@ -1,7 +1,18 @@
 .highscores {
-    margin: 150px auto 0 auto;
-    width: 100%;
+    margin: 0 auto;
+    padding: 25px;
     max-width: 450px;
+    position: fixed;
+    top: 550px;
+    left: 0;
+    right: 0;
+    transition: top 0.5s ease-in-out;
+    transition-delay: 0.3s;
+
+    &--open {
+        top: 0;
+        overflow-x: scroll;
+    }
 
     &__title {
         font-size: 1.125rem;
@@ -19,10 +30,26 @@
     }
 
     &__button {
-        margin-top: 25px;
         padding: 10px 20px;
         color: $primary;
         background-color: $background;
         border: 2px solid $primary;
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+/*         margin-top: 25px;
+        padding: 10px 20px;
+        color: $primary;
+        background-color: $background;
+        border: 2px solid $primary;
+
+        &--open {
+            margin: 0 auto;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        } */
     }
 }
