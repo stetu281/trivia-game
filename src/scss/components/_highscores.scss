@@ -1,0 +1,28 @@
+.highscores {
+    margin: 150px auto 0 auto;
+    width: 100%;
+    max-width: 450px;
+
+    &__title {
+        font-size: 1.125rem;
+        color: $secondary;
+    }
+
+    &__list {
+        margin-top: 15px;
+    }
+
+    &__list-item {
+        padding: 4px 0;
+        @extend %flex;
+        justify-content: space-between;
+    }
+
+    &__button {
+        margin-top: 25px;
+        padding: 10px 20px;
+        color: $primary;
+        background-color: $background;
+        border: 2px solid $primary;
+    }
+}

@@ -1,2 +1,10 @@
+@import './base/reset';
 @import './base/variables';
+@import './base/placeholders';
+@import './base/mixins';
 @import './base/basics';
+
+@import './components/buttons';
+@import './components/highscores';
+
+@import './pages/startpage';
