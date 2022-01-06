@@ -1,19 +1,33 @@
 .startpage {
+
+    .slide-out {
+        transform: translateY(0);
+        transition: transform 0.4s ease-in;
+
+        &--active {
+            transform: translateY(-500px);
+        }
+    }
+
     .main-title {
         margin-top: 30px;
         max-width: 300px;
-        font-size: 3rem;
+        font-size: 3rem;      
     }
+
+
 
     .instructions {
         margin-top: 120px;
         text-align: center;
         font-size: 0.875rem;
+        transition-delay: 0.1s;
     }
 
     .play-button {
         margin-top: 15px;
         font-size: 1.75rem;
+        transition-delay: 0.2s;
     }
 
     @include breakpoint {
