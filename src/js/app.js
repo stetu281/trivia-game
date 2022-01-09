@@ -1,11 +1,12 @@
 import css from '../scss/main.scss';
 
-const highscores = document.querySelector('.highscores');
+const scoresBtn = document.querySelector('.highscores__btn');
 const slideOutElements = document.querySelectorAll('.slide-out');
-const highscoresBtn = document.querySelector('.highscores__button');
+const highscoreList = document.querySelector('.highscores');
 
-highscoresBtn.addEventListener('click', (e) => {
-    slideOutElements.forEach(item => item.classList.toggle('slide-out--active'));
-    highscores.classList.toggle('highscores--open');
-    e.target.innerHTML === 'Open Scoreboard' ? e.target.innerHTML = 'Close Scoreboard' : e.target.innerHTML = 'Open Scoreboard';
+
+scoresBtn.addEventListener('click', (e) => {
+    slideOutElements.forEach(elem => elem.classList.toggle('slide-out--active'));
+    highscoreList.classList.toggle('highscores--open');
+    e.target.innerHTML === 'Open Scoreboard' ? e.target.innerHTML = 'Close Scoreboard' : e.target.innerHTML = 'Open Scoreboard';    
 });

@@ -1,17 +1,41 @@
 .highscores {
-    margin: 0 auto;
     padding: 25px;
-    max-width: 450px;
-    position: fixed;
-    top: 550px;
+    width: 100%;
+    position: absolute;
+    top: 70%;
     left: 0;
     right: 0;
-    transition: top 0.5s ease-in-out;
-    transition-delay: 0.3s;
+    transition: top 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition-delay: 0s;
 
     &--open {
+        height: 100vh;
+        position: fixed;
         top: 0;
-        overflow-x: scroll;
+        left: 0;
+        right: 0;
+        transition-delay: 0.3s;
+
+        & .highscores__container {
+            height: 90%;
+            overflow: scroll;
+            transition: heigth 2s;
+        }
+
+        & .highscores__list-item {
+
+            &:nth-child(n+4) {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__container {
+        margin: 0 auto 20px auto;
+        width: 100%;
+        max-width: 450px;
+        height: 140px;
+        transition: height 0.6s;
     }
 
     &__title {
@@ -21,35 +45,34 @@
 
     &__list {
         margin-top: 15px;
+        pointer-events: none;
     }
 
     &__list-item {
         padding: 4px 0;
         @extend %flex;
         justify-content: space-between;
+
+        &:nth-child(n+4) {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        $x: 1;
+        $child: 4;
+        @while $x < 20 {
+            &:nth-child(#{$child}) {
+                transition-delay: $x * 0.5s;
+            }
+            $x: $x + 0.1;
+            $child: $child + 1;
+        }
     }
 
-    &__button {
+    &__btn {
         padding: 10px 20px;
         color: $primary;
         background-color: $background;
         border: 2px solid $primary;
-        position: fixed;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-/*         margin-top: 25px;
-        padding: 10px 20px;
-        color: $primary;
-        background-color: $background;
-        border: 2px solid $primary;
-
-        &--open {
-            margin: 0 auto;
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-        } */
     }
 }
