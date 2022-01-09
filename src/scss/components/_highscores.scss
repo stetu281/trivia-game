@@ -18,8 +18,14 @@
 
         & .highscores__container {
             height: 90%;
-            overflow: scroll;
             transition: heigth 2s;
+            overflow: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         & .highscores__list-item {
