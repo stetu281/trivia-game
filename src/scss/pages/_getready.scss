@@ -6,7 +6,6 @@
     top: 0;
     left: -100%;
     right: 0;
-    background-color: $background;
     overflow: hidden;
     transition: left 0.5s ease-in-out;
 
@@ -16,20 +15,25 @@
         & .ready__text {
             animation-name: ready;
             animation-duration: 2.5s;
-            animation-iteration-count: 3;
+            animation-iteration-count: 2;
             animation-timing-function: ease-out;
             animation-delay: 0.8s;
             animation-fill-mode: both;
-            overflow: hidden;            
+            overflow: hidden;           
         }
     }
 
     @keyframes ready {
         0% {
             background-position-x: -500%;
+            opacity: 1;
+        }
+        90% {
+            opacity: 0.25;
         }
         100% {
             background-position-x: 500%;
+            opacity: 0;
         }
     }
 
@@ -42,6 +46,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-size: 80%;
+        opacity: 0;
     }
 
     @include breakpoint {
