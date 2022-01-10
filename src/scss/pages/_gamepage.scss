@@ -1,5 +1,8 @@
 .gamepage {
     @extend %flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 30px;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -11,5 +14,32 @@
 
     &--open {
         left: 0;
+    }
+
+    &__question {
+        font-size: 1.825rem;
+        font-weight: 700;
+    }
+
+    &__choice {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 15px;
+    }
+
+    &__answer {
+        padding: 10px;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: $white;
+        background-color: transparent;
+        border: 2px solid $white;
+        border-radius: 10px;
+    }
+
+    &__btn {
+        font-size: 1.5rem;
+        display: none;
     }
 }
