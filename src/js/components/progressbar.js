@@ -1,10 +1,10 @@
-export const timer = () => {
+export const progressbar = () => {
 
-    const interval = setInterval(progress, 1000);
+    let interval = setInterval(progress, 1000);
     let i = 1;
 
     function progress() {
-        let timer = 20;
+        let timer = 21;
 
         if(i === timer) {
             clearInterval(interval);
