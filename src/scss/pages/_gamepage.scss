@@ -16,6 +16,12 @@
         left: 0;
     }
 
+    &__error {
+        font-size: 1.5rem;
+        color: $primary;
+        text-align: center;
+    }
+
     &__question {
         font-size: 1.825rem;
         font-weight: 700;
@@ -40,6 +46,10 @@
 
     &__btn {
         font-size: 1.5rem;
-        display: none;
+        
+        &--hide {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 }

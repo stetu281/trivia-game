@@ -15,4 +15,8 @@
         border-radius: 10px;
         transition: width 1s linear;
     }
+
+    &--hide {
+        opacity: 0;
+    }
 }
