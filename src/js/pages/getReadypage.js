@@ -7,6 +7,6 @@ export const getReadypage = () => {
     setTimeout(() => {
         document.querySelector('.gamepage').classList.add('gamepage--open')
         getReadypage.classList.remove('ready--open');
-    }, 5000);
+    }, 2500);
     return;
 }
