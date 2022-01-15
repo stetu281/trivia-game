@@ -15,7 +15,8 @@ export const playGame = async () => {
 
         nextBtn.classList.remove('gamepage__btn--hide');
         nextBtn.addEventListener('click', () => {
-            console.log('next question');
+            document.querySelector('.timer').classList.remove('timer--hide');
+            singleRound(1000, result);
         });
     };
 };
