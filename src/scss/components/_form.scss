@@ -1,0 +1,36 @@
+.form {
+    @extend %flex;
+    flex-direction: column;
+    text-align: center;
+
+    &__label {
+        margin-top: 20px;
+    }
+
+    &__input {
+        margin-top: 10px;
+        padding: 5px 10px;
+        width: 100%;
+        font-size: 1rem;
+        color: $white;
+        border: 1px solid $primary;
+        border-radius: 10px;
+        background-color: rgba($black, 0.5);
+    }
+
+    &__btn {
+        margin-top: 20px;
+        font-size: 1.25rem;
+    }
+
+    &__or {
+        margin-top: 30px;
+    }
+
+    &__back-btn {
+        margin-top: 10px;
+        font-size: 1.125rem;
+        background-color: transparent;
+        border: 2px solid $primary;
+    }
+}

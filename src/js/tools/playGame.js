@@ -47,6 +47,8 @@ export const playGame = async () => {
         document.querySelector('.timer').classList.add('timer--hide');
         document.querySelectorAll('.gamepage__answer').forEach(btn => btn.disabled = true);
         nextBtn.classList.remove('gamepage__btn--hide');
+        //make function build resultbox based on wrong or right
+        document.querySelector('.resultbox').classList.add('resultbox--reveal');
     }));
 
     nextBtn.addEventListener('click', (e) => {
