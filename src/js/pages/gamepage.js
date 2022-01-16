@@ -1,5 +1,5 @@
-import * as Tools from '../tools/tools.js';
 import { singleRound } from '../tools/singleRound.js';
+import { getReadypage } from '../pages/getReadypage.js';
 
 
 export const gamepage = async () => {
@@ -8,22 +8,20 @@ export const gamepage = async () => {
     sessionStorage.setItem('gameToken', token);
     --------------------------------------------------*/
 
-
     const nextBtn = document.querySelector('.gamepage__btn');
-
-    const round = singleRound(2500, result);
-
+    const round = singleRound(result);
 
     function result(bool) {
         if(!bool) {
             document.querySelector('.resultbox').classList.add('resultbox--reveal');
-            return;
+        } else {
+            nextBtn.classList.remove('gamepage__btn--hide');
+            nextBtn.addEventListener('click', () => {
+                document.querySelector('.timer').classList.remove('timer--hide');
+                document.querySelector('.gamepage').classList.remove('gamepage--open');
+                getReadypage();
+                singleRound(result);
+            });
         }
-
-        nextBtn.classList.remove('gamepage__btn--hide');
-        nextBtn.addEventListener('click', () => {
-            document.querySelector('.timer').classList.remove('timer--hide');
-            singleRound(1000, result);
-        });
     };
 };

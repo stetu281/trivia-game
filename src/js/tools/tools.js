@@ -36,4 +36,4 @@ export const shuffleArr = (arr) => {
         arr[j] = temp;
     }
     return arr;
-}
+};

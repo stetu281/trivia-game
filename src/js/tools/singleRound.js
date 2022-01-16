@@ -1,8 +1,8 @@
 import * as Tools from './tools.js';
 import { renderQuestion } from './renderQuestion.js';
-import { progressbar } from '../components/progressbar.js';
 
-export const singleRound = async (timeout, callback) => {
+
+export const singleRound = async (callback) => {
 
     /*----------------------------------------------------
     const { response_code, results } = await Tools.getQuestion(token);
@@ -31,21 +31,36 @@ export const singleRound = async (timeout, callback) => {
         return;
     }
 
-    let result;
+    let playerAnswer;
+    const progressBar = document.querySelector('.timer__progress-bar');
+    let i = -1;
+    const maxTime = 21;
+
+    let interval = setInterval(() => {
+        if(i > 0 && i < maxTime) {
+            progressBar.style.width = `${i * 5}%`;
+        } else if(i === maxTime) {
+            clearInterval(interval);
+            playerAnswer = false;
+            callback(playerAnswer);
+        }    
+        i++;
+    }, 1000);
     
     renderQuestion(results);
-    setTimeout(progressbar, timeout);
 
     document.querySelector('.gamepage__choice').addEventListener('click', Tools.delegate('button', (e) => {
         if(e.target.innerHTML === results[0].correct_answer) {
             e.target.style.borderColor = 'green';
-            result = true;               
+            playerAnswer = true;               
         } else {
             e.target.style.borderColor = 'red';
-            result = false;   
+            playerAnswer = false;   
         }
+        clearInterval(interval);
+        progressBar.style.width = '0%';
         document.querySelectorAll('.gamepage__answer').forEach(btn => btn.disabled = true);
         document.querySelector('.timer').classList.add('timer--hide'); 
-        callback(result);   
+        callback(playerAnswer);   
     }));
-}
+};

@@ -5,7 +5,7 @@ export const getReadypage = () => {
     getReadypage.classList.add('ready--open');
 
     setTimeout(() => {
-        document.querySelector('.gamepage').classList.add('gamepage--open')
+        document.querySelector('.gamepage').classList.add('gamepage--open');
         getReadypage.classList.remove('ready--open');
     }, 2500);
     return;
