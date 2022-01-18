@@ -4,6 +4,8 @@ export const renderQuestion = (results) => {
 
     const container = document.querySelector('.gamepage__choice');
 
+    document.querySelector('.gamepage__score').innerHTML = `Your score: `;
+    document.querySelector('.gamepage__cat').innerHTML = results[0].category;
     document.querySelector('.gamepage__question').innerHTML = results[0].question;
     container.innerHTML = '';
 

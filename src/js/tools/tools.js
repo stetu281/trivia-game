@@ -37,3 +37,10 @@ export const shuffleArr = (arr) => {
     }
     return arr;
 };
+
+export const resetGame = (interval) => {
+    clearInterval(interval);
+    document.querySelector('.timer__progress-bar').style.width = '0%';
+    document.querySelectorAll('.gamepage__answer').forEach(btn => btn.disabled = true);
+    document.querySelector('.timer').classList.add('timer--hide');
+}

@@ -10,10 +10,16 @@
     bottom: 0;
     right: 0;
     left: -100%;
-    transition: left 0.5s ease-in-out;
+    transition: left 0.3s ease-in-out;
 
     &--open {
         left: 0;
+    }
+
+    &__score {
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
 
     &__error {
@@ -22,7 +28,13 @@
         text-align: center;
     }
 
+    &__cat {
+        font-size: 0.95rem;
+        color: $primary;
+    }
+
     &__question {
+        margin-top: 10px;
         max-width:400px;
         font-size: 1.825rem;
         font-weight: 700;

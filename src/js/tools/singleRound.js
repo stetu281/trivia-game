@@ -1,8 +1,10 @@
 import * as Tools from './tools.js';
 import { renderQuestion } from './renderQuestion.js';
+import { getReadypage } from '../pages/getReadypage.js';
+import { gameOver } from '../components/gameOver.js';
 
 
-export const singleRound = async (callback) => {
+export const singleRound = async (score) => {
 
     /*----------------------------------------------------
     const { response_code, results } = await Tools.getQuestion(token);
@@ -31,36 +33,45 @@ export const singleRound = async (callback) => {
         return;
     }
 
-    let playerAnswer;
-    const progressBar = document.querySelector('.timer__progress-bar');
     let i = -1;
     const maxTime = 21;
-
-    let interval = setInterval(() => {
-        if(i > 0 && i < maxTime) {
-            progressBar.style.width = `${i * 5}%`;
-        } else if(i === maxTime) {
-            clearInterval(interval);
-            playerAnswer = false;
-            callback(playerAnswer);
-        }    
-        i++;
-    }, 1000);
+    const nextBtn = document.querySelector('.gamepage__btn');
     
     renderQuestion(results);
+    document.querySelector('.gamepage__score').innerHTML = `Your score: ${score}`;
 
-    document.querySelector('.gamepage__choice').addEventListener('click', Tools.delegate('button', (e) => {
-        if(e.target.innerHTML === results[0].correct_answer) {
-            e.target.style.borderColor = 'green';
-            playerAnswer = true;               
-        } else {
-            e.target.style.borderColor = 'red';
-            playerAnswer = false;   
-        }
-        clearInterval(interval);
-        progressBar.style.width = '0%';
-        document.querySelectorAll('.gamepage__answer').forEach(btn => btn.disabled = true);
-        document.querySelector('.timer').classList.add('timer--hide'); 
-        callback(playerAnswer);   
-    }));
+    const promise = new Promise((resolve, reject) => {
+
+        let interval = setInterval(() => {
+            if(i > 0 && i < maxTime) {
+                document.querySelector('.timer__progress-bar').style.width = `${i * 5}%`;
+            } else if(i === maxTime) {
+                Tools.resetGame(interval);
+                gameOver(score);
+            }    
+            i++;
+        }, 1000);
+
+        document.querySelector('.gamepage__choice').addEventListener('click', Tools.delegate('button', (e) => {
+            if(e.target.innerHTML === results[0].correct_answer) {
+                e.target.style.borderColor = 'green';
+                Tools.resetGame(interval);
+                nextBtn.classList.remove('gamepage__btn--hide');
+                nextBtn.addEventListener('click', () => {
+                    score++;
+                    document.querySelector('.timer').classList.remove('timer--hide');
+                    document.querySelector('.gamepage').classList.remove('gamepage--open');
+                    getReadypage();
+                    nextBtn.classList.add('gamepage__btn--hide');
+                    resolve(score);
+                });        
+            } else {
+                e.target.style.borderColor = 'red';
+                Tools.resetGame(interval);
+                gameOver(score);  
+            } 
+        }));        
+    });
+
+    return promise;
 };
