@@ -42,11 +42,7 @@
 
     &__score {
         margin: 10px auto 0 auto;
-        @extend %flex;
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        border: 2px solid $primary;
+        display: block;
         font-size: 2rem;
         font-weight: 700;
     }
