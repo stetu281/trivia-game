@@ -17,7 +17,9 @@ const resolvers = {
     Query: {
         players: async (obj, args, context) => {
             const [players] = await context.db.query(
-                `SELECT * FROM highscores LIMIT ?`,
+                `SELECT * FROM highscores 
+                ORDER BY score DESC
+                LIMIT ?`,
                 [args.limit]
             );
             return players;
@@ -53,4 +55,9 @@ const server = new ApolloServer({
     introspection: true,
 });
 
-exports.handler = server.createHandler();
+exports.handler = server.createHandler({
+    cors: {
+        origin: '*',
+        credentials: true,
+    },
+});
