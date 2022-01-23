@@ -28,6 +28,8 @@
   "dependencies": {
     "apollo-server-lambda": "^2.25.2",
     "dotenv": "^14.2.0",
+    "graphql": "^15.8.0",
+    "graphql-request": "^3.7.0",
     "mysql2": "^2.3.3"
   }
 }
