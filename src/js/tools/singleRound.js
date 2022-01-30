@@ -1,8 +1,7 @@
 import * as Tools from './tools.js';
 import { renderQuestion } from './renderQuestion.js';
 import { getReadypage } from '../pages/getReadypage.js';
-import { gameOver } from '../components/gameOver.js';
-
+import { gamepage } from '../pages/gamepage.js';
 
 export const singleRound = async (score) => {
 
@@ -33,12 +32,15 @@ export const singleRound = async (score) => {
         return;
     }
 
+    const selection = document.querySelectorAll('.gamepage__choice');
+    const nextBtn = document.querySelector('.gamepage__btn');
     let i = -1;
     const maxTime = 21;
-    const nextBtn = document.querySelector('.gamepage__btn');
-    
+
     renderQuestion(results);
     document.querySelector('.gamepage__score').innerHTML = `Your score: ${score}`;
+
+
 
     const promise = new Promise((resolve, reject) => {
 
@@ -47,31 +49,26 @@ export const singleRound = async (score) => {
                 document.querySelector('.timer__progress-bar').style.width = `${i * 5}%`;
             } else if(i === maxTime) {
                 Tools.resetGame(interval);
-                gameOver(score);
+                resolve(0);
             }    
             i++;
         }, 1000);
 
-        document.querySelector('.gamepage__choice').addEventListener('click', Tools.delegate('button', (e) => {
-            if(e.target.innerHTML === results[0].correct_answer) {
-                e.target.style.borderColor = 'green';
+        selection.forEach(item => {
+            item.addEventListener('click', Tools.delegate('button', (e) => {
                 Tools.resetGame(interval);
-                nextBtn.classList.remove('gamepage__btn--hide');
-                nextBtn.addEventListener('click', () => {
-                    score++;
-                    document.querySelector('.timer').classList.remove('timer--hide');
-                    document.querySelector('.gamepage').classList.remove('gamepage--open');
-                    getReadypage();
-                    nextBtn.classList.add('gamepage__btn--hide');
-                    resolve(score);
-                });        
-            } else {
-                e.target.style.borderColor = 'red';
-                Tools.resetGame(interval);
-                gameOver(score);  
-            } 
-        }));        
-    });
 
+                if(e.target.innerHTML === results[0].correct_answer) {
+                    e.target.style.borderColor = 'green';
+                    score++;
+                    nextBtn.classList.remove('gamepage__btn--hide');
+                    resolve(1);
+                } else {
+                    e.target.style.borderColor = 'red';
+                    resolve(0);
+                }
+            }),{once: true});
+        })
+    })
     return promise;
 };

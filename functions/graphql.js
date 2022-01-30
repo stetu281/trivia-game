@@ -11,6 +11,12 @@ const typeDefs = gql`
         name: String!
         score: Int!
     }
+    type Mutation {
+        writeData (
+            name: String
+            score: Int
+        ):Player!
+    }
 `;
 
 const resolvers = {
@@ -30,9 +36,23 @@ const resolvers = {
                 `SELECT * FROM highscores WHERE id = ?`,
                 [args.id]
             );
-            return estates[0];
+            return players[0];
         }
     },
+    Mutation: {
+        writeData: async (obj, args, context) => {
+            const [result] = await context.db.execute(`
+                INSERT INTO highscores (name, score) VALUES (?, ?)
+            `, [args.name, args.score]);
+
+            const newScore = result.insertId;
+
+            const [scores] = await context.db.query(
+                `SELECT * FROM highscores WHERE id = ?`, [newScore]
+            )
+            return scores[0];
+        }
+    }
 };
 
 const connection = mysql.createPool({
